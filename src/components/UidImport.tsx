@@ -176,8 +176,7 @@ export function UidImport({
                       : "（新增，是否可用待确认）"}
                   </label>
                   <p>
-                    突破 {c.ascension ?? "未知"} · 命座{" "}
-                    {c.constellation ?? "未知"} · 普攻／战技／爆发：
+                    突破 {c.ascension ?? "未知"} · 普攻／战技／爆发：
                     {c.talents.map((n) => n ?? "未知").join(" / ")}
                     （含接口提供的额外等级）
                   </p>
@@ -212,7 +211,7 @@ export function UidImport({
                   try {
                     onApply(mergeShowcase(profile, data, selected), data.uid);
                     setNotice(
-                      `已合并 ${selected.length} 位角色，导入前后快照已保留。`,
+                      `已合并 ${selected.length} 位角色，已生成下方展柜初步结论，导入前后快照已保留。`,
                     );
                     setData(null);
                   } catch (e) {

@@ -1,3 +1,4 @@
+import { diagnoseShowcase } from "./showcase-diagnosis";
 import { lunarDiagnoses } from "./lunar";
 import type { Profile, History } from "./model";
 import type { SourceKey } from "../data/sources";
@@ -16,7 +17,7 @@ export type Diagnosis = {
   scope: string;
 };
 export function diagnose(p: Profile, history: History[] = []): Diagnosis[] {
-  const out: Diagnosis[] = [...lunarDiagnoses(p)];
+  const out: Diagnosis[] = [...lunarDiagnoses(p), ...diagnoseShowcase(p)];
   const add = (
     id: string,
     title: string,

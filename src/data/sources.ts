@@ -12,7 +12,8 @@ export const sources = {
   columbina: {
     name: "KQM · 哥伦比娅",
     url: "https://keqingmains.com/q/columbina-quickguide/",
-    version: "Luna IV",
+    version: "7.0（仅复核后台月反应主词条）",
+    checkedAt: "2026-09-28",
   },
   flins: {
     name: "KQM · 菲林斯",

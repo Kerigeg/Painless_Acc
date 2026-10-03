@@ -2,6 +2,8 @@ import { createServer } from "node:http";
 import { readFile, stat } from "node:fs/promises";
 import { resolve, extname } from "node:path";
 import { createEnkaHandler } from "./enka.mjs";
+import { createAccounts } from "./accounts.mjs";
+const accounts = createAccounts();
 const root = resolve("dist");
 const api = createEnkaHandler();
 const types = {
@@ -12,6 +14,7 @@ const types = {
   ".png": "image/png",
 };
 const server = createServer(async (req, res) => {
+  if (await accounts.handler(req, res)) return;
   if (await api(req, res)) return;
   try {
     if (req.method !== "GET" && req.method !== "HEAD") {

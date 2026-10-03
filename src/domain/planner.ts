@@ -1,3 +1,4 @@
+import { mainStatGuides } from "../data/main-stat-guides";
 import { lunarMainStats } from "../data/equipment";
 import { guideFor } from "../data/characters";
 import { lunarTasks } from "./lunar";
@@ -202,7 +203,9 @@ export function plan(p: Profile, history: History[] = []): Task[] {
   for (const x of d
     .filter(
       (x) =>
-        !x.id.startsWith("lunar-") && !["unknown", "details"].includes(x.id),
+        !x.id.startsWith("lunar-") &&
+        !x.id.startsWith("showcase-") &&
+        !["unknown", "details"].includes(x.id),
     )
     .slice(0, 3)) {
     if (
@@ -314,8 +317,12 @@ export function compareArtifacts(
       (candidate && !current
         ? "候选主词条更接近当前月感电职责的常见方向，可先试穿；"
         : "仅凭主词条不能确认哪件更优，先保留当前装备；") +
-      guide!.stats +
-      " 本次未计强化、套装、武器和副词条，不保证数值提升，随机刷取预算0。"
+      (mainStatGuides[guide!.name]?.slots[next.slot]?.conditional?.[
+        next.main
+      ] ??
+        mainStatGuides[guide!.name]?.note ??
+        guide!.stats) +
+      " 请按体检中的逐部位条件复核。 本次未计强化、套装、武器和副词条，不保证数值提升，随机刷取预算0。"
     );
   }
   if (role !== "治疗")

@@ -1,7 +1,7 @@
 const CHARACTER_URL =
-  "https://raw.githubusercontent.com/EnkaNetwork/API-docs/master/store/characters.json";
+  "https://raw.githubusercontent.com/EnkaNetwork/API-docs/master/store/gi/avatars.json";
 const LOCALE_URL =
-  "https://raw.githubusercontent.com/EnkaNetwork/API-docs/master/store/loc.json";
+  "https://raw.githubusercontent.com/EnkaNetwork/API-docs/master/store/gi/locs.json";
 export const UID_PATTERN = /^[1-9]\d{8,9}$/;
 const messages = {
   400: "UID 格式不正确",

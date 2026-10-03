@@ -1,4 +1,4 @@
-import type { SourceKey } from "./sources";
+import type { SourceKey } from "./sources.ts";
 export const normalizeName = (name: string) =>
   ({ 皇女: "菲谢尔", "菲谢尔（皇女）": "菲谢尔", 伊涅夫: "伊涅芙" })[
     name.trim()

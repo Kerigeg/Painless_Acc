@@ -99,11 +99,11 @@ export function convertShowcase(raw: unknown): Showcase {
       reportedName(String(avatarId))
     )
       warnings.push(
-        `${name}：名称来自用户确认的 ID 对应关系，上游资料待核实；未启用专属机制或天赋映射`,
+        `${name}：在线名称映射缺失，使用已核实的本地名称；专属机制不由名称推断，天赋仅按实际返回的映射读取`,
       );
     if (name.startsWith("未知角色 #"))
       warnings.push(
-        `${name}：上游名称映射缺失；合并后可在账号档案校正名称，数值仍保留，专属机制暂不支持`,
+        `${name}：上游名称映射缺失；数值仍保留，名称等待资料更新，专属机制暂不支持`,
       );
     const c = newCharacter(name);
     c.id = `enka-${data.uid}-${avatarId}`;

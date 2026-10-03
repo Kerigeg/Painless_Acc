@@ -1,8 +1,7 @@
-// Display names only. User confirmed these UID-import IDs on 2026-09-19.
-// Not independently verified against upstream game data; no mechanics inferred.
-export const reportedIdentities: Record<string, string> = {
-  "10000150": "奥黛塔",
-  "10000148": "阿罗夏",
-};
+// Display-name fallback only; no mechanics inferred.
+// Name snapshot verified 2026-09-28 against EnkaNetwork/API-docs
+// store/gi/avatars.json + store/gi/locs.json (commit ac2c249e).
+import { enkaNames } from "./enka-names.ts";
+export const reportedIdentities: Record<string, string> = enkaNames;
 export const reportedName = (id: string) =>
   reportedIdentities[id.split("-").at(-1)!];

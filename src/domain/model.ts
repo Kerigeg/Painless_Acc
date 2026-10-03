@@ -1,5 +1,5 @@
-import { normalizeName } from "../data/characters";
-import { reportedName } from "../data/character-identities";
+import { normalizeName } from "../data/characters.ts";
+import { reportedName } from "../data/character-identities.ts";
 import { z } from "zod";
 const text = z.string().max(2000);
 const num = (max: number, min = 0) =>
@@ -255,9 +255,9 @@ export const blank = (): Profile => ({
   artifacts: [],
 });
 export const newCharacter = (name = ""): Character => ({
-  nameOverride: null,
   id: crypto.randomUUID(),
   name: normalizeName(name),
+  nameOverride: null,
   role: "未知",
   ready: "未知",
   level: null,

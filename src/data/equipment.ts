@@ -1,33 +1,16 @@
-// Main-stat directions only; no damage scores, substat valuation or inventory search.
-export const lunarMainStats: Record<string, Record<string, string[]>> = {
-  砂糖: {
-    时之沙: ["元素精通", "元素充能效率%"],
-    空之杯: ["元素精通"],
-    理之冠: ["元素精通"],
-  },
-  哥伦比娅: {
-    时之沙: ["生命值%", "元素充能效率%", "元素精通"],
-    空之杯: ["生命值%", "元素精通"],
-    理之冠: ["生命值%", "暴击率%", "暴击伤害%"],
-  },
-  菲林斯: {
-    时之沙: ["攻击力%", "元素精通", "元素充能效率%"],
-    空之杯: ["攻击力%", "元素精通"],
-    理之冠: ["暴击率%", "暴击伤害%"],
-  },
-  伊涅芙: {
-    时之沙: ["攻击力%", "元素精通", "元素充能效率%"],
-    空之杯: ["攻击力%", "元素精通"],
-    理之冠: ["暴击率%", "暴击伤害%"],
-  },
-  爱诺: {
-    时之沙: ["元素充能效率%", "元素精通"],
-    空之杯: ["元素精通", "水元素伤害%"],
-    理之冠: ["元素精通", "暴击率%", "暴击伤害%"],
-  },
-  菲谢尔: {
-    时之沙: ["攻击力%", "元素精通"],
-    空之杯: ["雷元素伤害%", "攻击力%"],
-    理之冠: ["暴击率%", "暴击伤害%"],
-  },
-};
+import { mainStatGuides } from "./main-stat-guides";
+// Coarse candidate filter only. Conditions are evaluated by domain/main-stats.ts.
+export const lunarMainStats: Record<
+  string,
+  Record<string, string[]>
+> = Object.fromEntries(
+  Object.entries(mainStatGuides).map(([name, g]) => [
+    name,
+    Object.fromEntries(
+      Object.entries(g.slots).map(([slot, r]) => [
+        slot,
+        [...r.preferred, ...Object.keys(r.conditional ?? {})],
+      ]),
+    ),
+  ]),
+);

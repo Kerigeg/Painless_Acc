@@ -146,7 +146,7 @@ it("repairs reported 7.0 IDs without guessing talents or rewriting history", () 
     expect(s.characters[0].name).toBe(name);
     expect(s.characters[0].talents).toEqual([null, null, null]);
     expect(s.characters[0].role).toBe("未知");
-    expect(s.warnings.join(" ")).toContain("用户确认");
+    expect(s.warnings.join(" ")).toContain("已核实的本地名称");
     const state = initialStore();
     state.profile = mergeShowcase(blank(), s, [s.characters[0].id]);
     state.profile.characters[0].name = `未知角色 #${id}`;
@@ -165,4 +165,27 @@ it("repairs reported 7.0 IDs without guessing talents or rewriting history", () 
     );
     expect(restored.profile.artifacts).toEqual(state.profile.artifacts);
   }
+});
+
+it("repairs saved Columbina without changing builds, unknown IDs or explicit names", () => {
+  const state = initialStore();
+  const c = newCharacter("未知角色 #10000125");
+  c.id = "enka-123456789-10000125";
+  c.level = 90;
+  c.talents = [null, 8, 8];
+  state.profile.characters = [c];
+  state.profile.team = [c.id];
+  const repaired = parseStore(JSON.stringify(state));
+  expect(repaired.profile.characters[0]).toEqual({ ...c, name: "哥伦比娅" });
+  expect(repaired.profile.team).toEqual([c.id]);
+  c.nameOverride = "我的角色";
+  expect(parseStore(JSON.stringify(state)).profile.characters[0].name).toBe(
+    c.name,
+  );
+  c.nameOverride = null;
+  c.id = "enka-123456789-99999999";
+  state.profile.team = [c.id];
+  expect(parseStore(JSON.stringify(state)).profile.characters[0].name).toBe(
+    c.name,
+  );
 });

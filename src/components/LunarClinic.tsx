@@ -77,97 +77,12 @@ export function LunarClinic({
             diagnose();
           }}
         >
-          启用专项并查看诊断 →
+          启用专项并查看分析 →
         </button>
-      </section>
-      <section className="card">
-        <h3>记录这一轮发生了什么</h3>
-        <div className="grid3">
-          {(
-            [
-              {
-                key: "cloud",
-                label: "雷云观察",
-                options: ["未知", "持续", "中断", "未出现"],
-              },
-              {
-                key: "hydro",
-                label: "后台水覆盖",
-                options: ["未知", "持续", "中断"],
-              },
-              {
-                key: "flinsSwap",
-                label: "菲林斯战技状态中途切人",
-                options: ["未知", "是", "否"],
-              },
-              {
-                key: "flinsBurst",
-                label: "菲林斯使用的爆发",
-                options: ["未知", "短爆发", "普通爆发"],
-              },
-              {
-                key: "safeScene",
-                label: "已有能应对的低风险场景",
-                options: ["未知", "已确认", "未确认"],
-              },
-              {
-                key: "hexerei",
-                label: "魔导相关解锁情况（不计数值）",
-                options: ["未知", "已解锁", "未解锁"],
-              },
-            ] as const
-          ).map((f) => (
-            <label className="field" key={f.key}>
-              <span>{f.label}</span>
-              <select
-                value={p.lunar[f.key]}
-                onChange={(e) =>
-                  update({
-                    focus: "月感电",
-                    lunar: { ...p.lunar, [f.key]: e.target.value },
-                  })
-                }
-              >
-                {f.options.map((o) => (
-                  <option key={o}>{o}</option>
-                ))}
-              </select>
-            </label>
-          ))}
-        </div>
-        <div className="grid2">
-          <label className="field">
-            <span>已解锁练习地区</span>
-            <input
-              value={p.region}
-              placeholder="填你实际可以进入的地区"
-              onChange={(e) => update({ region: e.target.value })}
-            />
-          </label>
-          <label className="field">
-            <span>本阶段可投入时间（分钟）</span>
-            <input
-              type="number"
-              min={1}
-              max={1440}
-              value={p.minutes ?? ""}
-              placeholder="未知"
-              onChange={(e) =>
-                update({
-                  minutes:
-                    e.target.value === "" ? null : Number(e.target.value),
-                })
-              }
-            />
-          </label>
-        </div>
-        <p>
-          首次练习与下一轮反馈分开保存；改变队伍或观测资料后会重新核查任务前置。
-        </p>
       </section>
       <div className="section-title">
         <h2>六位角色，各司其职</h2>
-        <button onClick={profile}>UID 导入 / 详细档案 →</button>
+        <button onClick={profile}>返回 UID 导入与分析 →</button>
       </div>
       <div className="lunar-grid">
         {lunarCharacters.map((g) => {

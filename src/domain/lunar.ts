@@ -1,3 +1,4 @@
+import { assessMainStats } from "./main-stats";
 import type { Profile, History } from "./model";
 import type { Diagnosis } from "./rules";
 import type { Task } from "./planner";
@@ -150,6 +151,9 @@ export function lunarDiagnoses(p: Profile): Diagnosis[] {
       (a) =>
         a.owner === c.id &&
         a.slot === "空之杯" &&
+        assessMainStats(p, c).rows.some(
+          (r) => r.slot === a.slot && r.status === "建议调整",
+        ) &&
         ((["菲林斯", "伊涅芙"].includes(c.name) && a.main === "雷元素伤害%") ||
           (c.name === "哥伦比娅" && a.main === "水元素伤害%")),
     );
